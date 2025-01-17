@@ -1,0 +1,6 @@
+[submodule "quark"]
+	path = quark
+	url = git@github.com:pnnh/quark.git
+[submodule "src/atom"]
+	path = src/atom
+	url = git@github.com:pnnh/atom.git
