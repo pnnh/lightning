@@ -1,20 +1,19 @@
 'use client'
 
-import {formatRfc3339} from '@pnnh/atom'
 import './table.scss'
 import React from 'react'
-import {PLSelectResult} from '@pnnh/polaris-business'
-import {PaginationPartial} from '@pnnh/atom-react/client'
-import {replaceSearchParams} from '@pnnh/atom'
-import {calcPagination} from "@pnnh/atom";
-import {channelName, PSArticleModel} from "@pnnh/polaris-business";
+import {channelName, PSArticleModel} from "@/atom/common/models/article";
+import {PLSelectResult} from "@/atom/common/models/protocol";
+import {calcPagination} from "@/atom/common/utils/pagination";
+import {replaceSearchParams} from "@/atom/common/utils/query";
+import {formatRfc3339} from "@/atom/common/utils/datetime";
 
 export function ArticleTable(props: {
     result: PLSelectResult<PSArticleModel>,
     search: Record<string, string>
 }) {
     const result = props.result
-    const pagination = calcPagination(result.page, result.count, result.size)
+    const pagination = calcPagination(result.data.page, result.data.count, result.data.size)
     return <>
         <div className={'tableContainer'}>
             <table className={'articleTable'}>
@@ -32,7 +31,7 @@ export function ArticleTable(props: {
                 </thead>
                 <tbody>
                 {
-                    props.result.range.map((item, index) => {
+                    props.result.data.range.map((item, index) => {
                         return <ArticleTableRow key={index} model={item}/>
                     })
                 }

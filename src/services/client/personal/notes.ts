@@ -1,6 +1,8 @@
-import {PLSelectResult, PSNoteModel} from "@pnnh/polaris-business";
+
 import {clientSigninDomain} from "@/services/client/domain";
 import {openDatabase} from "@/services/client/database";
+import {PSNoteModel} from "@/atom/common/models/personal/note";
+import {PLSelectResult} from "@/atom/common/models/protocol";
 
 export async function selectNotes(libraryUrn: string, notebookUrn: string, queryString: string = '') {
     const domain = await clientSigninDomain()

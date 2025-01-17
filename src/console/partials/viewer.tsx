@@ -1,13 +1,13 @@
 import React from 'react'
-import {useRecoilState, useRecoilValue} from 'jotai'
+import {useAtom, useAtomValue} from 'jotai'
 import {ArticleContainer} from "@/components/console/note";
 import './viewer.scss'
 import {noteAtom} from "@/console/providers/notebook";
 import {storeArticleToDatabase} from "@/services/client/personal/notes";
-import {PSNoteModel} from "@pnnh/polaris-business";
+import {PSNoteModel} from "@/atom/common/models/personal/note";
 
 export function ArticleEditorArea() {
-    const [selectedArticle, setSelectedArticle] = useRecoilState(noteAtom)
+    const [selectedArticle, setSelectedArticle] = useAtom(noteAtom)
     if (!selectedArticle || !selectedArticle.current || !selectedArticle.current.body) {
         return <div>Loading</div>
     }

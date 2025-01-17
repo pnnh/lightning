@@ -2,9 +2,8 @@ import styles from './page.module.scss'
 import React from 'react'
 import {Toolbar} from './partials/toolbar'
 import {ArticleTable} from './partials/table'
-import {PLSelectResult} from '@pnnh/polaris-business'
-import {PSArticleModel} from "@pnnh/polaris-business";
-import {serverMakeHttpGetV2} from "@/services/server/fetch";
+import {PLSelectResult} from "@/atom/common/models/protocol";
+import {PSArticleModel} from "@/atom/common/models/article";
 
 export default async function Page({searchParams}: {
     searchParams: Record<string, string>

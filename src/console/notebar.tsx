@@ -1,15 +1,16 @@
 import {useEffect, useState} from 'react'
-import {useRecoilValue, useSetRecoilState} from 'jotai'
 import {libraryAtom, noteAtom, notebookAtom} from './providers/notebook'
 import React from 'react'
-import {PSNoteModel, PLSelectResult} from '@pnnh/polaris-business'
 import {selectNotes} from "@/services/client/personal/notes";
 import './notebar.scss'
+import {useAtomValue, useSetAtom} from "jotai";
+import {PSNoteModel} from "@/atom/common/models/personal/note";
+import {PLSelectResult} from "@/atom/common/models/protocol";
 
 export function ConsoleNotebar() {
     const [notesResult, setNotesResult] = useState<PLSelectResult<PSNoteModel>>()
-    const libraryState = useRecoilValue(libraryAtom)
-    const notebookState = useRecoilValue(notebookAtom)
+    const libraryState = useAtomValue(libraryAtom)
+    const notebookState = useAtomValue(notebookAtom)
     useEffect(() => {
         if (!libraryState || !libraryState.current || !libraryState.current.urn || !notebookState ||
             !notebookState.current || !notebookState.current.urn) {
@@ -20,12 +21,12 @@ export function ConsoleNotebar() {
         })
     }, [notebookState])
 
-    if (!notesResult || !notesResult.range || notesResult.range.length <= 0) {
+    if (!notesResult || !notesResult.data.range || notesResult.data.range.length <= 0) {
         return <div>Empty</div>
     }
     return <div className={'noteList'}>
         {
-            notesResult.range.map(item => {
+            notesResult.data.range.map(item => {
                 return <NoteCard key={item.urn} item={item}/>
             })
         }
@@ -33,7 +34,7 @@ export function ConsoleNotebar() {
 }
 
 function NoteCard({item}: { item: PSNoteModel }) {
-    const setNote = useSetRecoilState(noteAtom)
+    const setNote = useSetAtom(noteAtom)
 
     return <div className={'noteCard'} onClick={() => {
         setNote({

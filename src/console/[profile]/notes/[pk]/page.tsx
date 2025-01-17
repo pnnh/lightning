@@ -1,9 +1,9 @@
 import React, {useEffect, useState} from 'react'
 import {clientMakeHttpGet} from '@/services/client/http'
-import {NoteModel} from "@pnnh/polaris-business";
-import {TocItem} from "@pnnh/stele";
-import {generatorRandomString} from "@pnnh/atom";
-import {BuildBodyHtml} from "@pnnh/stele/server";
+import {NoteModel} from "@/atom/common/models/personal/note";
+import {TocItem} from "@/atom/common/models/toc";
+import {generatorRandomString} from "@/atom/common/utils/string";
+import {BuildBodyHtml} from "@/atom/server/article";
 
 interface IReadRequest {
     params: { pk: string }

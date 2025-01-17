@@ -1,5 +1,7 @@
-import {PLSelectResult, PSLibraryModel} from "@pnnh/polaris-business";
+
 import {clientSigninDomain} from "@/services/client/domain";
+import {PLSelectResult} from "@/atom/common/models/protocol";
+import {PSLibraryModel} from "@/atom/common/models/personal/library";
 
 export async function selectLibraries() {
     const domain = await clientSigninDomain()

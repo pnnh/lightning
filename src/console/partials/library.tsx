@@ -1,20 +1,20 @@
 import React from 'react'
 import {useEffect, useState} from 'react'
-import {useRecoilState, useRecoilValue} from 'jotai'
+import {useAtom, useAtomValue} from 'jotai'
 import {selectLibraries} from '@/services/client/personal/library'
 import './library.scss'
 import {libraryAtom} from "@/console/providers/notebook";
 
 export function LibrarySelector() {
     const [notebookDropdown, setLibraryDropdown] = useState<boolean>(false)
-    const [libraryState, setLibraryState] = useRecoilState(libraryAtom)
+    const [libraryState, setLibraryState] = useAtom(libraryAtom)
 
     useEffect(() => {
         selectLibraries().then(selectResult => {
-            if (selectResult && selectResult.range && selectResult.range.length > 0) {
+            if (selectResult && selectResult.data.range && selectResult.data.range.length > 0) {
                 setLibraryState({
-                    models: selectResult.range,
-                    current: selectResult.range[0]
+                    models: selectResult.data.range,
+                    current: selectResult.data.range[0]
                 })
             }
         })

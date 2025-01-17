@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react'
 import {MarkdownEditorForm} from '../../partials/edit'
 import {clientMakeHttpGet, clientMakeHttpPut} from '@/services/client/http'
-import { NoteModel } from '@pnnh/polaris-business'
+import {NoteModel} from "@/atom/common/models/personal/note";
 
 interface IReadRequest {
     params: { pk: string }
