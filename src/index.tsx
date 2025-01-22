@@ -9,22 +9,13 @@ import {
     Link,
 } from "react-router-dom";
 import {ConsolePage} from "./console/page";
-import {NewPage} from "@/welcome/new";
-import {OpenPage} from "@/welcome/open";
 import {WelcomePage} from "@/welcome/welcome";
+import {ImagesPage} from "@/tools/images/images";
 
 const router = createBrowserRouter([
     {
         path: "/",
         element: (<WelcomePage/>),
-    },
-    {
-        path: "/new",
-        element: <NewPage/>,
-    },
-    {
-        path: "/open",
-        element: <OpenPage/>,
     },
     {
         path: "/about",
@@ -33,6 +24,10 @@ const router = createBrowserRouter([
     {
         path: "/console",
         element: <ConsolePage/>,
+    },
+    {
+        path: "/images",
+        element: <ImagesPage/>,
     }
 ]);
 
