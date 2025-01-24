@@ -3,9 +3,9 @@
 
 .fileGrid {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
   grid-gap: 1rem;
-  width: 100%;
+  width: functions.subFullWidth(variables.$leftAreaWidth);
 
   .fileCard {
     display: flex;

@@ -10,6 +10,7 @@ export interface IDirectoryDrive {
     openLocation(): Promise<PSFileModel>
 
     selectFiles: (parentPath: string, options: ISelectFilesOptions | undefined) => Promise<PLSelectResult<PSFileModel>>
+    getImageFileData: (fileUid: string) => Promise<ArrayBuffer>
 }
 
 interface IFileHandle {
@@ -196,6 +197,20 @@ export class BrowserDirectoryDrive implements IDirectoryDrive {
                 count: 0
             }
         }
+    }
+
+    async getImageFileData(fileUid: string): Promise<ArrayBuffer> {
+        const fileItem = this.#filesMap.get(fileUid)
+        if (fileItem) {
+            const file = await fileItem.handle.getFile()
+            const content = new Blob([file], {type: 'image/png'})
+            const url = URL.createObjectURL(content)
+            fileItem.model.Url = url
+            console.log('fileItem', fileItem, file, content)
+            return await file.arrayBuffer()
+        }
+
+        return Promise.reject('file not found')
     }
 
 }

@@ -1,14 +1,16 @@
 import styles from './files.module.scss'
 import * as React from "react";
 import {useState} from "react";
-import {FileListContainer} from "./partials/files";
+import {FilesContainer} from "./partials/files";
 import {NotebookBar} from "./partials/library";
+import AccountTreeIcon from '@mui/icons-material/AccountTree';
+import GridOnIcon from '@mui/icons-material/GridOn';
+import {useAtom} from "jotai";
+import {filesViewAtom, ViewGrid, ViewTable} from "@/tools/files/partials/state";
 
-const ViewTable = 'table'
-const ViewGrid = 'grid'
 
 export function FilesPage() {
-    const [view, setView] = useState(ViewTable)
+    const [view, setView] = useAtom(filesViewAtom)
 
     return <div className={styles.imageFilesPage}>
         <div className={styles.leftArea}>
@@ -16,9 +18,10 @@ export function FilesPage() {
         </div>
         <div className={styles.rightArea}>
             <div className={styles.rightToolbar}>
-
+                <AccountTreeIcon onClick={() => setView(ViewTable)}/>
+                <GridOnIcon onClick={() => setView(ViewGrid)}/>
             </div>
-            <FileListContainer></FileListContainer>
+            <FilesContainer></FilesContainer>
         </div>
     </div>
 }

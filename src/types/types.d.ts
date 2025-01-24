@@ -10,6 +10,7 @@ declare global {
             storeArticle: (article: PSNoteModel) => Promise<void>
             addLocation: () => Promise<PSFileModel>
             selectLocation: (parentPath: string) => Promise<PLSelectResult<PSFileModel>>
+            getImageFileData: (fileUid: string) => Promise<ArrayBuffer>
             selectFiles: (parentPath: string, options: ISelectFilesOptions | undefined) => Promise<PLSelectResult<PSFileModel>>
         }
     }

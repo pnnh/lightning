@@ -75,12 +75,18 @@ async function addLocation(): Promise<PSFileModel> {
     return rootDir
 }
 
+async function getImageFileData(fileUid: string): Promise<ArrayBuffer> {
+    const file = await fileDrive.getImageFileData(fileUid)
+
+    return file
+}
+
 if (typeof window !== 'undefined') {
     window.BridgeAPI = {
         storeArticle: storeArticle,
         selectFiles: selectFiles,
         getAppConfig: getAppConfig,
         addLocation,
-        selectLocation
+        selectLocation, getImageFileData
     }
 }
