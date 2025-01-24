@@ -1,5 +1,5 @@
 import {clientSigninDomain} from "@/services/client/domain";
-import {openDatabase} from "@/services/client/database";
+import {openIndexedDB} from "@/services/client/database";
 import {PSNoteModel} from "@/atom/common/models/personal/note";
 import {PLSelectResult} from "@/atom/common/models/protocol";
 
@@ -15,7 +15,7 @@ interface DatabaseArticleItem {
 }
 
 export async function storeArticleToDatabase(article: PSNoteModel) {
-    const db = await openDatabase('articles', 1);
+    const db = await openIndexedDB('articles', 1);
     const tx = db.transaction('keyVal', 'readwrite');
     const store = tx.objectStore('keyVal');
 

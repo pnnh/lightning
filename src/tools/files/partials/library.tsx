@@ -5,15 +5,14 @@ import {PLSelectResult} from "@/atom/common/models/protocol";
 import {PSFileModel} from "@/atom/common/models/filesystem";
 import {useAtom} from "jotai";
 import {currentPathAtom} from "@/tools/files/partials/state";
+import AddIcon from '@mui/icons-material/Add';
 
-export function LibrarySelector() {
+export function NotebookBar() {
     const [libraryListState, setLibraryListState] = useState<PLSelectResult<PSFileModel>>()
     const [currentPath, setCurrentPath] = useAtom(currentPathAtom)
 
     useEffect(() => {
-        window.BridgeAPI.selectFiles('', {
-            directory: true
-        }).then(selectResult => {
+        window.BridgeAPI.selectLocation('').then(selectResult => {
             if (selectResult && selectResult.data && selectResult.data.range && selectResult.data.range.length > 0) {
                 setLibraryListState(selectResult)
             }
@@ -24,10 +23,19 @@ export function LibrarySelector() {
         !libraryListState.data.range || libraryListState.data.range.length <= 0) {
         return <div>暂无笔记本</div>
     }
-    return <>
+    return <div className={'stylesSidebar'}>
         <div className={'notebookSelector'}>
             <div className={'notebookTitle'}>
                 <span>位置</span>
+                <AddIcon onClick={() => {
+                    console.log('add notebook')
+                    window.BridgeAPI.addLocation().then((dir) => {
+                        if (!dir) {
+                            return
+                        }
+                        setCurrentPath(dir)
+                    });
+                }}/>
             </div>
         </div>
         {
@@ -45,5 +53,5 @@ export function LibrarySelector() {
                 </div>
             </div>
         }
-    </>
+    </div>
 }

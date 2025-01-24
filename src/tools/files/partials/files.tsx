@@ -11,9 +11,7 @@ export function FileListContainer() {
     const [currentPath, setCurrentPath] = useAtom(currentPathAtom)
 
     useEffect(() => {
-        window.BridgeAPI.selectFiles('', {
-            directory: true
-        }).then(selectResult => {
+        window.BridgeAPI.selectFiles('', {}).then(selectResult => {
             setFilesState(selectResult)
         })
     }, [currentPath])
@@ -24,7 +22,7 @@ export function FileListContainer() {
     return <div className={'fileListContainer'}>
         {
             filesState.data.range.map(item => {
-                return <FileList key={item.URN} item={item} filesResult={filesState} level={0}/>
+                return <FileList key={item.Uid} item={item} filesResult={filesState} level={0}/>
             })
         }
     </div>
@@ -46,7 +44,7 @@ function FileList({item, filesResult, level}: {
                         '/icons/console/triangle-down-fill.png'} alt={'open'}
                          onClick={() => {
                              if (!childrenFilesState) {
-                                 window.BridgeAPI.selectFiles(item.Path, undefined).then(selectResult => {
+                                 window.BridgeAPI.selectFiles(item.Uid, undefined).then(selectResult => {
                                      setChildrenFilesState(selectResult)
                                  })
                              } else {
@@ -61,10 +59,10 @@ function FileList({item, filesResult, level}: {
         </div>
         <div className={'childrenFileList'}>
             {childrenFilesState && childrenFilesState.data && childrenFilesState.data.range && childrenFilesState.data.range.length > 0 &&
-                childrenFilesState.data.range.map(item => {
-                    return <FileList key={item.URN} item={item} filesResult={childrenFilesState}
+                childrenFilesState.data.range.map(((item, index) => {
+                    return <FileList key={item.Uid} item={item} filesResult={childrenFilesState}
                                      level={level + 1}/>
-                })
+                }))
             }
         </div>
     </div>

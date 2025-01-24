@@ -2,7 +2,7 @@ import styles from './files.module.scss'
 import * as React from "react";
 import {useState} from "react";
 import {FileListContainer} from "./partials/files";
-import {NotebookBar} from "./partials/sidebar";
+import {NotebookBar} from "./partials/library";
 
 const ViewTable = 'table'
 const ViewGrid = 'grid'
