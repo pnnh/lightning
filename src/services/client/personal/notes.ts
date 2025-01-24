@@ -1,4 +1,3 @@
-
 import {clientSigninDomain} from "@/services/client/domain";
 import {openDatabase} from "@/services/client/database";
 import {PSNoteModel} from "@/atom/common/models/personal/note";
@@ -33,7 +32,7 @@ export async function storeArticleToDatabase(article: PSNoteModel) {
     if (nowValue) {
         if (nowValue.timestamp <= nowDate.getTime() - 1000) {
             // 每一秒向服务端同步一次文章状态
-            await window.serverAPI.storeArticle(article)
+            await window.BridgeAPI.storeArticle(article)
         }
     }
 }
