@@ -13,6 +13,7 @@ import {WelcomePage} from "@/welcome/welcome";
 import {ImagesPage} from "@/tools/images/images";
 import {FilesPage} from "@/tools/files/files";
 import ToolsLayout from "@/tools/layout";
+import {HighlightPage} from "@/tools/highlight/page";
 
 const rootElement = document.getElementById("root")
 if (!rootElement) {
@@ -27,6 +28,7 @@ ReactDOM.createRoot(rootElement).render(
             <Route element={<ToolsLayout/>}>
                 <Route path="files" index={true} element={<FilesPage/>}/>
                 <Route path="images" element={<ImagesPage/>}/>
+                <Route path="highlight" element={<HighlightPage/>}/>
             </Route>
         </Routes>
     </BrowserRouter>

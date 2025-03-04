@@ -13,7 +13,7 @@
     "resolveJsonModule": true,
     "jsx": "react-jsx",
     "types": [
-      "node",
+      "node"
     ],
     "typeRoots": [
       "node_modules/@types",
@@ -39,7 +39,11 @@
         "src/*"
       ]
     },
-    "plugins": [{ "name": "typescript-plugin-css-modules" }]
+    "plugins": [
+      {
+        "name": "typescript-plugin-css-modules"
+      }
+    ]
   },
   "include": [
     "**/*.ts",

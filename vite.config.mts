@@ -1,6 +1,6 @@
 import {ConfigEnv, loadEnv, UserConfig} from 'vite';
 import {defineConfig} from 'vite';
-import react from "@vitejs/plugin-react"
+import react from "@vitejs/plugin-react-swc"
 import path from "node:path";
 
 export default defineConfig((configEnv) => {
@@ -13,7 +13,7 @@ export default defineConfig((configEnv) => {
         build: {
             outDir: `dist`,
         },
-        plugins: [react()],
+        plugins: [react({tsDecorators: true})],
         resolve: {
             preserveSymlinks: true,
             alias: [{
