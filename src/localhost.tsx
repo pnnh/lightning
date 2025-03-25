@@ -1,11 +1,28 @@
-import {PSNoteModel} from "@/atom/common/models/personal/note";
+import '@fontsource/roboto/300.css';
+import '@fontsource/roboto/400.css';
+import '@fontsource/roboto/500.css';
+import '@fontsource/roboto/700.css';
+
+import './localhost.scss';
+
+import * as React from "react";
+import ReactDOM from "react-dom/client";
+import {BrowserRouter, Route, Routes} from "react-router";
+import {ConsolePage} from "./console/page";
+import {WelcomePage} from "@/welcome/welcome";
+import {ImagesPage} from "@/tools/images/images";
+import {FilesPage} from "@/tools/files/files";
+import ToolsLayout from "@/tools/layout";
+import {HighlightPage} from "@/tools/highlight/page";
+
 import {CodeOk, PLSelectResult} from "@/atom/common/models/protocol";
 import {PSFileModel} from "@/atom/common/models/filesystem";
 import {IAppConfig} from "@/services/common/config";
 import {BrowserDirectoryDrive, ISelectFilesOptions} from "@/services/drive";
+import {PSArticleModel} from "@/atom/common/models/article";
 
 
-function storeArticle(article: PSNoteModel): Promise<void> {
+function storeArticle(article: PSArticleModel): Promise<void> {
     return new Promise<void>((resolve, reject) => {
         // window.BridgeAPI.storeArticle(article).then(() => {
         //     resolve()
@@ -90,3 +107,23 @@ if (typeof window !== 'undefined') {
         selectLocation, getImageFileData
     }
 }
+
+
+const rootElement = document.getElementById("root")
+if (!rootElement) {
+    throw new Error("Root element not found");
+}
+
+ReactDOM.createRoot(rootElement).render(
+    <BrowserRouter>
+        <Routes>
+            <Route index={true} element={<WelcomePage/>}/>
+            <Route path="console" element={<ConsolePage/>}/>
+            <Route element={<ToolsLayout/>}>
+                <Route path="files" index={true} element={<FilesPage/>}/>
+                <Route path="images" element={<ImagesPage/>}/>
+                <Route path="highlight" element={<HighlightPage/>}/>
+            </Route>
+        </Routes>
+    </BrowserRouter>
+);

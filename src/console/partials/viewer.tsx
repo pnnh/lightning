@@ -4,7 +4,7 @@ import {ArticleContainer} from "@/components/console/note";
 import './viewer.scss'
 import {noteAtom} from "@/console/providers/notebook";
 import {storeArticleToDatabase} from "@/services/client/personal/notes";
-import {PSNoteModel} from "@/atom/common/models/personal/note";
+import {PSArticleModel} from "@/atom/common/models/article";
 
 export function ArticleEditorArea() {
     const [selectedArticle, setSelectedArticle] = useAtom(noteAtom)
@@ -13,12 +13,12 @@ export function ArticleEditorArea() {
     }
     const article = selectedArticle.current
 
-    const changeArticle = (article: PSNoteModel) => {
+    const changeArticle = (article: PSArticleModel) => {
         setSelectedArticle({
             current: article
         })
         storeArticleToDatabase(article).then(() => {
-            console.log('ArticleStored', article.urn)
+            console.log('ArticleStored', article.uid)
         })
     }
 

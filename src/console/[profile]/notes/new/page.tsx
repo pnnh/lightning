@@ -1,12 +1,12 @@
 import React from 'react'
 import {MarkdownEditorForm} from '../partials/edit'
 import {clientMakeHttpPut} from '@/services/client/http'
-import {NoteModel} from "@/models/personal/note";
+import {PSArticleModel} from "@/atom/common/models/article";
 
 export default function Page() {
-    const newModel: NoteModel = {
+    const newModel: PSArticleModel = {
+        creator: "",
         uid: '',
-        urn: '',
         title: '',
         header: 'markdown',
         body: '',
@@ -15,18 +15,15 @@ export default function Page() {
         keywords: '',
         description: '',
         cover: '',
-        name: '',
         discover: 0,
         channel: '',
-        channel_name: '',
         partition: '',
         path: '',
-        owner: '',
-        children: 0
+        owner: ''
     }
 
     return <MarkdownEditorForm model={newModel} onSubmit={async (newModel) => {
-        const result = await clientMakeHttpPut<NoteModel>('/restful/article', newModel)
+        const result = await clientMakeHttpPut<PSArticleModel>('/restful/article', newModel)
         console.debug('result', result)
         if (result && result.uid) {
             // router.replace('/console/articles')

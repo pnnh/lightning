@@ -1,25 +1,25 @@
 import {clientSigninDomain} from "@/services/client/domain";
 import {openIndexedDB} from "@/services/client/database";
-import {PSNoteModel} from "@/atom/common/models/personal/note";
 import {PLSelectResult} from "@/atom/common/models/protocol";
+import {PSArticleModel} from "@/atom/common/models/article";
 
 export async function selectNotes(libraryUrn: string, notebookUrn: string, queryString: string = '') {
     const domain = await clientSigninDomain()
     const url = `/personal/libraries/${libraryUrn}/notebooks/${notebookUrn}/notes?${queryString}`
-    return await domain.makeGet<PLSelectResult<PSNoteModel>>(url)
+    return await domain.makeGet<PLSelectResult<PSArticleModel>>(url)
 }
 
 interface DatabaseArticleItem {
-    article: PSNoteModel;
+    article: PSArticleModel;
     timestamp: number;
 }
 
-export async function storeArticleToDatabase(article: PSNoteModel) {
+export async function storeArticleToDatabase(article: PSArticleModel) {
     const db = await openIndexedDB('articles', 1);
     const tx = db.transaction('keyVal', 'readwrite');
     const store = tx.objectStore('keyVal');
 
-    const dbKey = 'article-' + article.urn;
+    const dbKey = 'article-' + article.uid;
     const nowValue = await store.get(dbKey) as DatabaseArticleItem;
     const nowDate = new Date();
 

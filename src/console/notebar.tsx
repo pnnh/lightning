@@ -4,11 +4,11 @@ import React from 'react'
 import {selectNotes} from "@/services/client/personal/notes";
 import './notebar.scss'
 import {useAtomValue, useSetAtom} from "jotai";
-import {PSNoteModel} from "@/atom/common/models/personal/note";
 import {PLSelectResult} from "@/atom/common/models/protocol";
+import {PSArticleModel} from "@/atom/common/models/article";
 
 export function ConsoleNotebar() {
-    const [notesResult, setNotesResult] = useState<PLSelectResult<PSNoteModel>>()
+    const [notesResult, setNotesResult] = useState<PLSelectResult<PSArticleModel>>()
     const libraryState = useAtomValue(libraryAtom)
     const notebookState = useAtomValue(notebookAtom)
     useEffect(() => {
@@ -27,13 +27,13 @@ export function ConsoleNotebar() {
     return <div className={'noteList'}>
         {
             notesResult.data.range.map(item => {
-                return <NoteCard key={item.urn} item={item}/>
+                return <NoteCard key={item.uid} item={item}/>
             })
         }
     </div>
 }
 
-function NoteCard({item}: { item: PSNoteModel }) {
+function NoteCard({item}: { item: PSArticleModel }) {
     const setNote = useSetAtom(noteAtom)
 
     return <div className={'noteCard'} onClick={() => {

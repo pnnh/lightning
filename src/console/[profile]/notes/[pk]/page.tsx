@@ -1,9 +1,9 @@
 import React, {useEffect, useState} from 'react'
 import {clientMakeHttpGet} from '@/services/client/http'
-import {NoteModel} from "@/atom/common/models/personal/note";
 import {TocItem} from "@/atom/common/models/toc";
 import {generatorRandomString} from "@/atom/common/utils/string";
 import {BuildBodyHtml} from "@/atom/server/article";
+import {PSArticleModel} from "@/atom/common/models/article";
 
 interface IReadRequest {
     params: { pk: string }
@@ -11,10 +11,10 @@ interface IReadRequest {
 
 export default function Page(request: IReadRequest) {
     const pk = request.params.pk
-    const [model, setModel] = useState<NoteModel>()
+    const [model, setModel] = useState<PSArticleModel>()
 
     useEffect(() => {
-        clientMakeHttpGet<NoteModel | undefined>('/posts/' + pk).then((result) => {
+        clientMakeHttpGet<PSArticleModel | undefined>('/posts/' + pk).then((result) => {
             if (result) {
                 setModel(result)
             }
