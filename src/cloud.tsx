@@ -21,8 +21,11 @@ function cfTurnstileSetup() {
 }
 
 function setupAll() {
-    pwaSetup();
-    cfTurnstileSetup();
+    // 暂时不启用PWA功能
+    //pwaSetup();
+    if (window.turnstile) {
+        cfTurnstileSetup();
+    }
 }
 
 $(document).ready(() => {

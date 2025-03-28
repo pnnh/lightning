@@ -20,6 +20,8 @@ import {PSFileModel} from "@/atom/common/models/filesystem";
 import {IAppConfig} from "@/services/common/config";
 import {BrowserDirectoryDrive, ISelectFilesOptions} from "@/services/drive";
 import {PSArticleModel} from "@/atom/common/models/article";
+import {useBaseUrlWithSuffix} from "@/config/browser";
+import BasexPage from "@/tools/basex/basex";
 
 
 function storeArticle(article: PSArticleModel): Promise<void> {
@@ -113,16 +115,18 @@ const rootElement = document.getElementById("root")
 if (!rootElement) {
     throw new Error("Root element not found");
 }
+const baseUrl = useBaseUrlWithSuffix()
 
 ReactDOM.createRoot(rootElement).render(
     <BrowserRouter>
         <Routes>
-            <Route index={true} element={<WelcomePage/>}/>
-            <Route path="console" element={<ConsolePage/>}/>
+            <Route index={true} path={baseUrl} element={<WelcomePage/>}/>
+            <Route path={`${baseUrl}console`} element={<ConsolePage/>}/>
             <Route element={<ToolsLayout/>}>
-                <Route path="files" index={true} element={<FilesPage/>}/>
-                <Route path="images" element={<ImagesPage/>}/>
-                <Route path="highlight" element={<HighlightPage/>}/>
+                <Route path={`${baseUrl}files`} index={true} element={<FilesPage/>}/>
+                <Route path={`${baseUrl}images`} element={<ImagesPage/>}/>
+                <Route path={`${baseUrl}highlight`} element={<HighlightPage/>}/>
+                <Route path={`${baseUrl}basex`} element={<BasexPage/>}/>
             </Route>
         </Routes>
     </BrowserRouter>

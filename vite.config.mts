@@ -6,11 +6,11 @@ import path from "path";
 export default defineConfig((configEnv) => {
     const env = loadEnv(configEnv.mode, __dirname); // 根据 mode 来判断当前是何种环境
 
-    console.log('env', env);
+    console.log('defineConfig Env', env);
     return {
         mode: env.mode,
         root: process.cwd(),
-        base: env.VITE_MODE === 'production' ? '/lightning' : '/lightning',
+        base: '/lightning',
         build: {
             outDir: `dist`,
             rollupOptions: {
@@ -38,7 +38,7 @@ export default defineConfig((configEnv) => {
             }]
         },
         server: {
-            hmr: false
+            hmr: true
         },
         clearScreen: false
     } as UserConfig;
