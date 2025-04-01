@@ -1,9 +1,18 @@
 import {Outlet} from "react-router";
 import styles from './layout.module.scss'
+import {useBaseUrl} from "@/config/browser";
 
 export default function ToolsLayout() {
+    const baseUrl = useBaseUrl()
     return <div>
-        <div className={styles.navToolbar}>小工具导航栏</div>
-        <Outlet/>
+        <div className={styles.navToolbar}>
+            <a href={`${baseUrl}`}>
+                <img src={`${baseUrl}/images/logo.png`} alt='logo'/>
+            </a>
+        </div>
+        <div className={styles.outletContainer}>
+            <Outlet/>
+
+        </div>
     </div>
 }

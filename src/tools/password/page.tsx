@@ -1,16 +1,16 @@
-import React from "react";
 import styles from './page.module.scss';
-import './client'
+
+import RandomPasswordPage from "@/atom/client/components/tools/password/random-password";
 import {CommentsClient} from "@/atom/client/components/comments/comments";
 import {useBrowserConfig} from "@/config/browser";
 
-export function HighlightPage() {
+export function PasswordPage() {
     const browserConfig = useBrowserConfig()
     const portalUrl = browserConfig.PUBLIC_PORTAL_URL
-    return <div className={styles.highlightPage}>
+    return <div className={styles.passwordPage}>
         <div className={styles.pageBody}>
-            <lightning-highlight/>
-            <CommentsClient portalUrl={portalUrl} resource={'953703b3-c8ef-da01-bddd-4312720f4d61'}/>
+            <RandomPasswordPage/>
+            <CommentsClient portalUrl={portalUrl} resource={'c26b810d-92c6-5632-a546-3e509e585b96'}/>
         </div>
     </div>
 }

@@ -22,6 +22,8 @@ import {BrowserDirectoryDrive, ISelectFilesOptions} from "@/services/drive";
 import {PSArticleModel} from "@/atom/common/models/article";
 import {useBaseUrlWithSuffix} from "@/config/browser";
 import BasexPage from "@/tools/basex/basex";
+import {PasswordPage} from "@/tools/password/page";
+import {UuidPage} from "@/tools/uuid/page";
 
 
 function storeArticle(article: PSArticleModel): Promise<void> {
@@ -127,6 +129,8 @@ ReactDOM.createRoot(rootElement).render(
                 <Route path={`${baseUrl}images`} element={<ImagesPage/>}/>
                 <Route path={`${baseUrl}highlight`} element={<HighlightPage/>}/>
                 <Route path={`${baseUrl}basex`} element={<BasexPage/>}/>
+                <Route path={`${baseUrl}uuid`} element={<UuidPage/>}/>
+                <Route path={`${baseUrl}password`} element={<PasswordPage/>}/>
             </Route>
         </Routes>
     </BrowserRouter>

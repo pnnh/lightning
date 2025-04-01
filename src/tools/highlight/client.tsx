@@ -17,6 +17,8 @@ import {SelectorElement} from "./selector";
 import {EditorElement} from "./editor";
 import domToImage from 'dom-to-image-more';
 import {globalStylesUrl, prismjsThemeUrl} from "./style";
+import * as React from "react";
+import {HTMLAttributes} from "react";
 
 setTheme(webLightTheme);
 
@@ -159,6 +161,11 @@ const styles = css`
         }
     }
 `
+
+export interface LightningHighlightAttributes extends React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement>, HTMLElement> {
+    children?: React.ReactNode;
+    title?: string
+}
 
 
 AppElement.define({

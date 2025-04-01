@@ -1,16 +1,27 @@
 import {IAppConfig} from "@/services/common/config";
 import {PSFileModel} from "@/atom/common/models/filesystem";
 import {PSArticleModel} from "@/atom/common/models/article";
+import * as React from 'react';
+import {LightningHighlightAttributes} from "@/tools/highlight/client";
 
-export {} // 该行不能去掉，否则会提示类型不存在
+declare module '*.module.css' {
+    const classes: { [key: string]: string };
+    export default classes;
+}
 
-declare global {
+declare module '*.module.scss' {
+    const classes: { [key: string]: string };
+    export default classes;
+}
+
+declare module "react" {
     namespace JSX {
         interface IntrinsicElements {
-            "lightning-highlight": any;
+            "lightning-highlight": LightningHighlightAttributes;
         }
     }
-
+}
+declare global {
     interface Window {
         turnstile: any;
         turnstileSuccessCallback: any;
