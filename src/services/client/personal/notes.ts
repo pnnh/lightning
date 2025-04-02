@@ -2,6 +2,7 @@ import {clientSigninDomain} from "@/services/client/domain";
 import {openIndexedDB} from "@/services/client/database";
 import {PLSelectResult} from "@/atom/common/models/protocol";
 import {PSArticleModel} from "@/atom/common/models/article";
+import {storeArticle} from "@/tools/files/files";
 
 export async function selectNotes(libraryUrn: string, notebookUrn: string, queryString: string = '') {
     const domain = await clientSigninDomain()
@@ -32,7 +33,7 @@ export async function storeArticleToDatabase(article: PSArticleModel) {
     if (nowValue) {
         if (nowValue.timestamp <= nowDate.getTime() - 1000) {
             // 每一秒向服务端同步一次文章状态
-            await window.BridgeAPI.storeArticle(article)
+            await storeArticle(article)
         }
     }
 }

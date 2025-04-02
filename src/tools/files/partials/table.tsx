@@ -2,6 +2,7 @@ import {PLSelectResult} from "@/atom/common/models/protocol";
 import {PSFileModel} from "@/atom/common/models/filesystem";
 import React, {useState} from "react";
 import './table.scss'
+import {selectFiles} from "@/tools/files/files";
 
 export function FilesTreeView({filesState}: { filesState: PLSelectResult<PSFileModel> }) {
     return <div className={'fileListContainer'}>
@@ -29,7 +30,7 @@ function FileList({item, filesResult, level}: {
                         '/icons/console/triangle-down-fill.png'} alt={'open'}
                          onClick={() => {
                              if (!childrenFilesState) {
-                                 window.BridgeAPI.selectFiles(item.Uid, undefined).then(selectResult => {
+                                 selectFiles(item.Uid, undefined).then(selectResult => {
                                      setChildrenFilesState(selectResult)
                                  })
                              } else {

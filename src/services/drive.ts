@@ -66,45 +66,39 @@ export class BrowserDirectoryDrive implements IDirectoryDrive {
         const filePath = currentPath + '/' + fileHandle.name
         for await (const item of fileHandle) {
             const [name, handle] = item
+            const uid = uuidV4()
+            const baseFileModel: PSFileModel = {
+                Uid: uid,
+                Title: name,
+                Name: name,
+                Keywords: '123',
+                Description: '123',
+                IsDir: false,
+                IsHidden: false,
+                IsIgnore: false,
+                Size: 123,
+                Url: '123', CreateTime: "", Handle: "", Path: filePath, UpdateTime: ""
+            }
             if (handle.kind === 'file') {
                 if (options?.directory) {
                     continue
                 }
-                const uid = uuidV4()
-                const fileModel: PSFileModel = {
-                    Uid: uid,
-                    Title: name,
-                    Name: name,
-                    Keywords: '123',
-                    Description: '123',
-                    IsDir: false,
-                    IsHidden: false,
-                    IsIgnore: false,
-                    Size: 123,
-                    Url: '123', CreateTime: "", Handle: "", Path: filePath, UpdateTime: ""
-                }
+                const fileModel: PSFileModel = baseFileModel
                 const fileHandle: IFileHandle = {
                     kind: handle.kind,
                     name: name,
                     handle: handle,
                     model: fileModel
                 }
+                const file = await handle.getFile()
+                const content = new Blob([file], {type: 'image/png'})
+                fileModel.Url = URL.createObjectURL(content)
                 this.#filesMap.set(uid, fileHandle)
                 fileList.push(fileModel)
             } else if (handle.kind === 'directory') {
                 const uid = uuidV4()
-                const fileModel: PSFileModel = {
-                    Uid: uid,
-                    Title: name,
-                    Name: name,
-                    Keywords: '123',
-                    Description: '123',
-                    IsDir: true,
-                    IsHidden: false,
-                    IsIgnore: false,
-                    Size: 123,
-                    Url: '123', CreateTime: "", Handle: "", Path: filePath, UpdateTime: ""
-                }
+                const fileModel: PSFileModel = baseFileModel
+                fileModel.IsDir = true
                 const fileHandle: IFileHandle = {
                     kind: handle.kind,
                     name: name,

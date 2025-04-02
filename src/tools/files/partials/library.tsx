@@ -6,21 +6,22 @@ import {PSFileModel} from "@/atom/common/models/filesystem";
 import {useAtom} from "jotai";
 import {currentPathAtom} from "@/tools/files/partials/state";
 import AddIcon from '@mui/icons-material/Add';
+import {addLocation, selectLocation} from "@/tools/files/files";
 
-export function NotebookBar() {
-    const [libraryListState, setLibraryListState] = useState<PLSelectResult<PSFileModel>>()
+export function LocationBar() {
+    const [locationListState, setLocationListState] = useState<PLSelectResult<PSFileModel>>()
     const [currentPath, setCurrentPath] = useAtom(currentPathAtom)
 
     useEffect(() => {
-        window.BridgeAPI.selectLocation('').then(selectResult => {
+        selectLocation('').then(selectResult => {
             if (selectResult && selectResult.data && selectResult.data.range && selectResult.data.range.length > 0) {
-                setLibraryListState(selectResult)
+                setLocationListState(selectResult)
             }
         })
     }, [])
 
-    if (!libraryListState || !libraryListState?.data ||
-        !libraryListState.data.range || libraryListState.data.range.length <= 0) {
+    if (!locationListState || !locationListState?.data ||
+        !locationListState.data.range || locationListState.data.range.length <= 0) {
         return <div>暂无笔记本</div>
     }
     return <div className={'stylesSidebar'}>
@@ -29,7 +30,7 @@ export function NotebookBar() {
                 <span>位置</span>
                 <AddIcon onClick={() => {
                     console.log('add notebook')
-                    window.BridgeAPI.addLocation().then((dir) => {
+                    addLocation().then((dir) => {
                         if (!dir) {
                             return
                         }
@@ -42,7 +43,7 @@ export function NotebookBar() {
             <div className={'libraryContainer'}>
                 <div className={'libraryList'}>
                     {
-                        libraryListState.data.range.map(((item, index) => {
+                        locationListState.data.range.map(((item, index) => {
                             return <div key={index} className={'notebookItem'} onClick={() => {
                                 setCurrentPath(item)
                             }}>

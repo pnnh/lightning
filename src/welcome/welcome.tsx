@@ -9,26 +9,26 @@ export function WelcomePage() {
     return <div className={styles.welcomePage}>
         <h1>欢迎使用</h1>
         <div className={styles.toolGrid}>
-            {/*<div className={styles.toolCard}>*/}
-            {/*    <div className={styles.toolIcon}>*/}
-            {/*        <img src={`${baseUrl}/images/tools/files.png`}></img>*/}
-            {/*    </div>*/}
-            {/*    <div>文件管理</div>*/}
-            {/*</div>*/}
+            <div className={styles.toolCard}>
+                <div className={styles.toolIcon}>
+                    <img src={`${baseUrl}/images/tools/files.png`}></img>
+                </div>
+                <div>文件管理</div>
+            </div>
             {/*<div className={styles.toolCard}>*/}
             {/*    <div className={styles.toolIcon}>*/}
             {/*        <img src={`${baseUrl}/images/tools/notes.png`}></img>*/}
             {/*    </div>*/}
             {/*    <div className={styles.toolName}>笔记管理</div>*/}
             {/*</div>*/}
-            <div className={styles.toolCard} onClick={() => navigate("/images")}>
-                <div className={styles.toolIcon}>
-                    <a href={`${baseUrl}/images`}>
-                        <img src={`${baseUrl}/images/tools/images.png`}></img>
-                    </a>
-                </div>
-                <div className={styles.toolName}>图片管理</div>
-            </div>
+            {/*<div className={styles.toolCard} onClick={() => navigate("/images")}>*/}
+            {/*    <div className={styles.toolIcon}>*/}
+            {/*        <a href={`${baseUrl}/images`}>*/}
+            {/*            <img src={`${baseUrl}/images/tools/images.png`}></img>*/}
+            {/*        </a>*/}
+            {/*    </div>*/}
+            {/*    <div className={styles.toolName}>图片管理</div>*/}
+            {/*</div>*/}
             <div className={styles.toolCard}>
                 <div className={styles.toolIcon}>
                     <a href={`${baseUrl}/password`}>
