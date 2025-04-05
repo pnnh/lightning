@@ -43,7 +43,15 @@ export default defineConfig((configEnv) => {
             }]
         },
         server: {
-            hmr: true
+            hmr: true,
+            proxy: {
+                '/lightning/suzaku': {
+                    target: 'http://localhost:7102',
+                    changeOrigin: true,
+                    ws: true,
+                    secure: false,
+                },
+            }
         },
         clearScreen: false
     } as UserConfig;
