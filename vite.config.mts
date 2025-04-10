@@ -43,11 +43,11 @@ export default defineConfig((configEnv) => {
             }]
         },
         server: {
-            hmr: true,
+            hmr: false,
             allowedHosts: ['huable.dev', 'huable.xyz', 'localhost'],
             // proxy: {
             //     '/lightning/suzaku': {
-            //         target: 'http://localhost:7102',
+            //         target: 'http://127.0.0.1:7102',
             //         changeOrigin: true,
             //         ws: true,
             //         secure: false,
